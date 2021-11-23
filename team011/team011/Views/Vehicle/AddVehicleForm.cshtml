@@ -1,0 +1,221 @@
+﻿
+@{
+    Layout = "~/views/shared/_layout.cshtml";
+    var allColors = ViewBag.allcolors as MultiSelectList;
+    var allmanufacturer = ViewBag.allmanufacturer as SelectList;
+    var alltypes = ViewBag.alltypes as SelectList;
+    var maxModelYear = ViewBag.currentYear+1;
+    //get current date
+    var currentDate = (string)DateTime.Now.ToString();
+
+}
+
+
+<div id="AddVehicle" class="card card-body bg-light">
+    <div class="mx-auto font-weight-bold" style="width: 200px;">
+        Add Vehicle
+    </div>
+    <form id="featureForm" class="feature">
+        <div class="form-group col-sm-6 ">
+
+            <label>VIN: </label>
+            <input type="text" id="txtVin" placeholder="Enter VIN Here" class="form-control" />
+
+        </div>
+
+        <div class="form-group col-sm-4 ">
+            <label>Manufacturer:</label>
+            @Html.DropDownList("ddlallmanufacturer", allmanufacturer, "Select From The List", htmlAttributes: new
+       {
+           name = "ddlallmanufacturer",
+           id = "ddlallmanufacturer",
+           @class = "form-control"
+
+       })
+        </div>
+        <div class="form-group col-sm-4 ">
+            <label>Model Year: (Max as @maxModelYear)</label>
+            <input type="number" id="txtModelYear" placeholder="Enter Model Year Here" class="form-control" min="1800" max="@maxModelYear" />
+        </div>
+
+        <div class="form-group col-sm-4 ">
+            <label>Model Type: </label>
+            <input type="text" id="txtModelName" placeholder="Enter Model Type Here" class="form-control" />
+        </div>
+
+        <div class="form-group col-sm-4 ">
+            <label>Vehicle Type:</label>
+            @Html.DropDownList("ddlalltypes", alltypes, "Select From The List", htmlAttributes: new
+       {
+           name = "ddlalltypes",
+           id = "ddlalltypes",
+           @class = "form-control"
+
+       })
+        </div>
+
+        <div class="form-group col-sm-4 " id="form_car_attr">
+            <label>number of doors: </label>
+            <input type="number" id="txtnumber_of_doors" placeholder="4" class="form-control" />
+        </div>
+
+        <div class="form-group col-sm-4 " id="form_convertible_attr">
+            <label>roof type: </label>
+            <input type="text" id="txtroof_type" placeholder="hard" class="form-control" />
+            <label>back seat count: </label>
+            <input type="number" id="txtback_seat_count" placeholder="2" class="form-control" />
+        </div>
+
+
+        <div class="form-group col-sm-4" id="form_truck_attr">
+            <label>cargo capacity: </label>
+            <input type="number" id="txtcargo_capacity" placeholder="50000.00" class="form-control" />
+            <label>cargo cover type </label>
+            <input type="text" id="txtcargo_cover_type" placeholder="hard" class="form-control" />
+            <label>number of rear axies: </label>
+            <input type="number" id="txtnumber_of_rear_axies" placeholder="2" class="form-control" />
+        </div>
+
+        <div class="form-group col-sm-8 " id="form_van_attr">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="backdoorRadios" id="exampleRadios1" value="1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    has driver side back door
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="backdoorRadios" id="exampleRadios2" value="0">
+                <label class="form-check-label" for="exampleRadios2">
+                    no driver side back door
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-4" id="form_suv_attr">
+            <label>number of cupholder: </label>
+            <input type="number" id="txtnumber_of_cupholder" placeholder="1" class="form-control" />
+            <label>drivetrain type </label>
+            <input type="text" id="txtdrivetrain_type" placeholder="AWD" class="form-control" />
+        </div>
+
+        <div class="form-group col-sm-4 ">
+            <label>Vehicle Color:</label>
+            @Html.DropDownList("ddlallColors", allColors, "Select From The List", htmlAttributes: new
+       {
+           name = "ddlallColors",
+           id = "ddlallColors",
+           @class = "form-control",
+           multiple = "multiple"
+
+       })
+        </div>
+
+        <div class="form-group col-sm-4 ">
+            <label>Invoice Price </label>
+            <input type="number" id="txtInvoicePrice" placeholder="Enter Invoice Price Here" class="form-control" min="0" />
+        </div>
+
+        <div class="form-group col-sm-4">
+            <label>Description (optional)</label>
+            <textarea class="form-control" id="txtDescription" rows="3"></textarea>
+        </div>
+        <div class="col-sm-4">
+            Add Date: @currentDate
+        </div>
+
+    </form>
+
+
+</div>
+
+
+<a href="@Url.Action("VehicleDetailForm","Vehicle")?VIN=WBALY1C5XED787278">
+    <input type="button" class="btn btn-primary" value="Add Vehicle" />
+
+
+</a>
+
+<script>
+
+    var vehicle_type;
+    $(document).ready(function () {
+        $.noConflict();
+        $("#ddlalltypes").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                vehicle_type = optionValue;
+                switch (vehicle_type) {
+                    case "Car":
+                        $('#form_car_attr').show();
+                        $('#form_convertible_attr').hide();
+                        $('#form_truck_attr').hide();
+                        $('#form_van_attr').hide();
+                        $('#form_suv_attr').hide();
+                        break;
+                    case "Convertible":
+                        $('#form_car_attr').hide();
+                        $('#form_convertible_attr').show();
+                        $('#form_truck_attr').hide();
+                        $('#form_van_attr').hide();
+                        $('#form_suv_attr').hide();
+                        break;
+                    case "Truck":
+                        $('#form_car_attr').hide();
+                        $('#form_convertible_attr').hide();
+                        $('#form_truck_attr').show();
+                        $('#form_van_attr').hide();
+                        $('#form_suv_attr').hide();
+                        break;
+                    case "VAN":
+                        $('#form_car_attr').hide();
+                        $('#form_convertible_attr').hide();
+                        $('#form_truck_attr').hide();
+                        $('#form_van_attr').show();
+                        $('#form_suv_attr').hide();
+                        break;
+                    case "SUV":
+                        $('#form_car_attr').hide();
+                        $('#form_convertible_attr').hide();
+                        $('#form_truck_attr').hide();
+                        $('#form_van_attr').hide();
+                        $('#form_suv_attr').show();
+                        break;
+
+                    default:
+                        $('#form_car_attr').hide();
+                        $('#form_convertible_attr').hide();
+                        $('#form_truck_attr').hide();
+                        $('#form_van_attr').hide();
+                        $('#form_suv_attr').hide();
+                }
+
+
+
+            });
+        }).change();
+
+
+        $('.allow_decimal').keypress(function (event) {
+            return isNumber(event, this)
+        });
+
+        
+
+
+    });
+
+    function isNumber(evt, element) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+        if (
+
+            (charCode != 46 || $(element).val().indexOf('.') != -1) &&
+            (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    
+</script>

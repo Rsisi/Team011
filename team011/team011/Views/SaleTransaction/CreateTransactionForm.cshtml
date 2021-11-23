@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = "~/views/shared/_layout.cshtml";
+    var currentDate = (string)DateTime.Now.ToString();
+}
+
+
+<div class="container">
+
+    <ul class="list-group list-group-flush">
+
+        <li class="list-group-item">
+            <div class="mx-auto font-weight-bold" style="width: 200px;">
+                Create Sales Order
+            </div>
+            <div class="row">
+                <div class="col text-center">VIN</div>
+                <div class="col-7 text-left">@ViewBag.VIN</div>
+
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <a href="@Url.Action("LookupCustomerForm","Customer")">
+                    <input type="button" class="btn btn-primary" value="Look Up Customer" />
+                </a>
+                <div class="col-8 text-center">Customer Selected as: @ViewBag.customer_name</div>
+            </div>
+
+
+        </li>
+        <li class="list-group-item">
+            <div class="form-group col-sm-4 ">
+                <label>Sold Price </label>
+                <input type="number" id="txtSoldPrice" placeholder="Enter Sold Price Here" class="form-control" min="0" />
+            </div>
+            <p>sold date: @currentDate</p>
+            <a href="@Url.Action("VehicleDetailForm","Vehicle")?VIN=@ViewBag.VIN">
+                <input type="button" class="btn btn-primary" value="Create Transaction" />
+            </a>
+        </li>
+    </ul>
+ </div>
