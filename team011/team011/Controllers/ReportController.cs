@@ -640,12 +640,12 @@ namespace team011.Controllers
                 belowCostSalesReport.transaction_date = (DateTime)reader["transaction_date"];
                 belowCostSalesReport.sold_price = (decimal)reader["sold_price"];
                 belowCostSalesReport.model_year = (int)reader["model_year"];
-                belowCostSalesReport.ratio = (decimal)reader["ratio "];
+                belowCostSalesReport.ratio = (decimal)reader["ratio"];
                 belowCostSalesReport.model_name = (string)reader["model_name"];
                 belowCostSalesReport.invoice_price = (decimal)reader["invoice_price"];
                 belowCostSalesReport.first_name = (string)reader["first_name"];
                 belowCostSalesReport.last_name = (string)reader["last_name"];
-                belowCostSalesReport.manufactuere_name = (string)reader["manufactuere_name"];
+                belowCostSalesReport.manufacturer_name = (string)reader["manufacturer_name"];
                 belowCostSalesReport.VIN = (string)reader["VIN"];
 
                 //add single report vairable into report list
