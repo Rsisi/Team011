@@ -1,9 +1,20 @@
 ﻿<Properties StartupConfiguration="{98BCB2B4-A5E7-4AF8-A2C9-8311F46A5D7C}|Default">
   <MonoDevelop.Ide.ItemProperties.team011 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Helper/ConnectionHelper.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Part.cs">
     <Files>
-      <File FileName="Controllers/ReportController.cs" Line="486" Column="31" />
-      <File FileName="Helper/ConnectionHelper.cs" Line="1" Column="1" />
+      <File FileName="Controllers/ReportController.cs" Line="713" Column="1" />
+      <File FileName="Helper/ConnectionHelper.cs" />
+      <File FileName="Views/Report/AverageInventoryTimeReport.cshtml" />
+      <File FileName="Views/Report/ColorReport.cshtml" />
+      <File FileName="Models/AverageInventoryTimeReport.cs" />
+      <File FileName="Models/BelowCostSalesReport.cs" />
+      <File FileName="Models/Monthly_Sales_Report.cs" />
+      <File FileName="Models/Parts_Statics_Report.cs" Line="1" Column="1" />
+      <File FileName="Views/Report/BelowCostSaleReport.cshtml" />
+      <File FileName="Views/Report/PartReport.cshtml" />
+      <File FileName="Views/Report/MonthlySaleReport.cshtml" />
+      <File FileName="Program.cs" Line="18" Column="1" />
+      <File FileName="Models/Part.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,10 +22,10 @@
           <Node name="team011" expanded="True">
             <Node name="team011" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Helper" expanded="True">
-                <Node name="ConnectionHelper.cs" selected="True" />
+              <Node name="Helper" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Part.cs" selected="True" />
               </Node>
-              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Customer" expanded="True" />
                 <Node name="Home" expanded="True" />

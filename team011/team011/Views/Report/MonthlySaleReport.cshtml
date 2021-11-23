@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+    var monthReport = ViewBag.month_report as List<Monthly_Sales_Report>;
 }
 <h1>Report - Monthly Sales</h1>
 
@@ -56,6 +56,30 @@
             </tr>
         </thead>
         <tbody id="unsoldvehicles">
+            @foreach (var r in monthReport)
+            {
+                <tr>
+                    <th>
+                        @r.year
+                    </th>
+                    <th>
+                        @r.month
+                    </th>
+                    <th>
+                        @r.totalVehicleSold
+                    </th>
+                    <th>
+                        @r.SalesIncome
+                    </th>
+                    <th>
+                        @r.totalNetIncome
+                    </th>
+                    <th>
+                        @r.totalVehicleSold
+                    </th>
+                </tr>
+
+            }
         </tbody>
     </table>
 
@@ -82,5 +106,6 @@
             </tr>
         </thead>
         <tbody id="unsoldvehicles">
+           
         </tbody>
     </table>

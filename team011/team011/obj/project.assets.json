@@ -7709,11 +7709,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/christineloveyy/Downloads/cs6400-2021-03-Team011 5reports done/team011/team011/team011.csproj",
+      "projectUniqueName": "/Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/team011.csproj",
       "projectName": "team011",
-      "projectPath": "/Users/christineloveyy/Downloads/cs6400-2021-03-Team011 5reports done/team011/team011/team011.csproj",
+      "projectPath": "/Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/team011.csproj",
       "packagesPath": "/Users/christineloveyy/.nuget/packages/",
-      "outputPath": "/Users/christineloveyy/Downloads/cs6400-2021-03-Team011 5reports done/team011/team011/obj/",
+      "outputPath": "/Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/christineloveyy/.config/NuGet/NuGet.Config"

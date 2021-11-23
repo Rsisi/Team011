@@ -145,7 +145,7 @@ namespace team011.Controllers
             var reports = new List<GrossIncomeReport>();
 
             cnn = ConnectionHelper.openConnection();
-            
+
             var reportsql = "SELECT * FROM Gross_Customer_Income_Report;";
             //sql command
             cmd = new SqlCommand(reportsql, cnn);
@@ -209,7 +209,7 @@ namespace team011.Controllers
 "INNER JOIN SalesTransaction AS S ON C.customerID=S.customerID " +
 "INNER JOIN VehicleCTE AS V ON S.VIN=V.VIN " +
 "INNER JOIN Users AS U ON U.user_name=S.sales_writer_user_name " +
-"WHERE C.customerID=@DisplayedCustomerID "+
+"WHERE C.customerID=@DisplayedCustomerID " +
 "ORDER BY S.transaction_date DESC, S.VIN ASC;";
 
             //sql command
@@ -230,7 +230,7 @@ namespace team011.Controllers
                 salesreport.FirstName = (string)reader["first_name"];
                 salesreport.LastName = (string)reader["last_name"];
                 //add single report vairable into report list
-                salesreports.Add(salesreport);    
+                salesreports.Add(salesreport);
             }
 
             var repairreports = new List<GrossOneIncomeRepairReport>();
@@ -268,12 +268,14 @@ namespace team011.Controllers
                 repairreport.VIN = (string)reader["VIN"];
                 repairreport.odometer_value = (int)reader["odometer_value"];
 
-                if (reader["parts_cost"] != DBNull.Value){
+                if (reader["parts_cost"] != DBNull.Value)
+                {
                     repairreport.parts_cost = (decimal)reader["parts_cost"];
                     repairreport.labor_charge = (decimal)reader["labor_charge"];
                     repairreport.total_cost = (decimal)reader["total_cost"];
-                }   
-                else {
+                }
+                else
+                {
                     repairreport.parts_cost = 0;
                     repairreport.labor_charge = (decimal)reader["labor_charge"];
                     repairreport.total_cost = (decimal)reader["labor_charge"];
@@ -375,7 +377,7 @@ namespace team011.Controllers
             cnn = ConnectionHelper.openConnection();
 
             var reportsql =
-"WITH VehicleCTE AS( "+
+"WITH VehicleCTE AS( " +
 "SELECT v.VIN, description, model_year, model_name, invoice_price, manufacturer_name , inv_writer_user_name, add_date,  'Car' as vehicle_type " +
 "FROM Vehicle v INNER JOIN Car c on  v.VIN = c.VIN " +
 "UNION SELECT v.VIN, description, model_year, model_name, invoice_price,manufacturer_name , inv_writer_user_name, add_date, 'Convertible' " +
@@ -491,7 +493,7 @@ namespace team011.Controllers
             var reportsql =
 
 
-"WITH VehicleCTE AS( "+
+"WITH VehicleCTE AS( " +
 "SELECT v.VIN, description, model_year, model_name, invoice_price, manufacturer_name , inv_writer_user_name, add_date,  'Car' as vehicle_type " +
 "FROM Vehicle v INNER JOIN Car c on  v.VIN = c.VIN " +
 "UNION SELECT v.VIN, description, model_year, model_name, invoice_price,manufacturer_name , inv_writer_user_name, add_date, 'Convertible' " +
@@ -615,29 +617,152 @@ namespace team011.Controllers
 
 
         public IActionResult BelowCostSaleReport()
-        {
+        {    //open sql connection
+            SqlCommand cmd;
+            SqlConnection cnn;
+            SqlDataReader reader;
+            //init a report list
+            var belowCostSalesReports = new List<BelowCostSalesReport>();
+            cnn = ConnectionHelper.openConnection();
+            var belowCostSalesReportssql = "SELECT * FROM Below_Cost_Sales_Report;";
+
+
+            //sql command
+            cmd = new SqlCommand(belowCostSalesReportssql, cnn);
+
+            //cmd.Parameters.AddWithValue("@DisplayedCustomerID", CustomerID);
+            //read resutlt
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var belowCostSalesReport = new BelowCostSalesReport();
+                belowCostSalesReport.customer_name = (string)reader["customer_name"];
+                belowCostSalesReport.transaction_date = (DateTime)reader["transaction_date"];
+                belowCostSalesReport.sold_price = (decimal)reader["sold_price"];
+                belowCostSalesReport.model_year = (int)reader["model_year"];
+                belowCostSalesReport.ratio = (decimal)reader["ratio "];
+                belowCostSalesReport.model_name = (string)reader["model_name"];
+                belowCostSalesReport.invoice_price = (decimal)reader["invoice_price"];
+                belowCostSalesReport.first_name = (string)reader["first_name"];
+                belowCostSalesReport.last_name = (string)reader["last_name"];
+                belowCostSalesReport.manufactuere_name = (string)reader["manufactuere_name"];
+                belowCostSalesReport.VIN = (string)reader["VIN"];
+
+                //add single report vairable into report list
+                belowCostSalesReports.Add(belowCostSalesReport);
+            }
+            ViewBag.BelowCostSalesReports = belowCostSalesReports;
             return View();
         }
 
 
         public IActionResult AverageInventoryTimeReport()
         {
+            //open sql connection
+            SqlCommand cmd;
+            SqlConnection cnn;
+            SqlDataReader reader;
+            //init a report list
+            var averageInventoryReports = new List<AverageInventoryTimeReport>();
+
+            cnn = ConnectionHelper.openConnection();
+
+            var reportsql = "SELECT * FROM Average_Time_Inventory_Report;";
+            //sql command
+            cmd = new SqlCommand(reportsql, cnn);
+            //read resutlt
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //put single row into report variable
+                var averageInventoryReport = new AverageInventoryTimeReport();
+                averageInventoryReport.vehicle_type = (string)reader["vehicle_type"];
+                averageInventoryReport.avg_day_in_inventory = (DateTime)reader["avg_day_in_inventory"];
+
+                //add single report vairable into report list
+                averageInventoryReports.Add(averageInventoryReport);
+            }
+
+            //append report list to viewbag for frontend reading
+            ViewBag.AverageInventoryTimeReports = averageInventoryReports;
             return View();
+
         }
 
 
         public IActionResult PartReport()
         {
+            //open sql connection
+            SqlCommand cmd;
+            SqlConnection cnn;
+            SqlDataReader reader;
+            //init a report list
+            var partReports = new List<Parts_Statics_Report>();
+
+            cnn = ConnectionHelper.openConnection();
+
+            var reportsql = "SELECT * FROM Parts_Statics_Report;";
+            //sql command
+            cmd = new SqlCommand(reportsql, cnn);
+            //read resutlt
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //put single row into report variable
+                var partReport = new Parts_Statics_Report();
+                partReport.totalpartssupplied = (int)reader["totalpartssupplied"];
+                partReport.totalspent = (decimal)reader["totalspent"];
+                partReport.vendor = (string)reader["vendor"];
+
+                //add single report vairable into report list
+                partReports.Add(partReport);
+            }
+
+            //append report list to viewbag for frontend reading
+            ViewBag.part_report = partReports;
             return View();
         }
 
 
         public IActionResult MonthlySaleReport()
         {
+            //open sql connection
+            SqlCommand cmd;
+            SqlConnection cnn;
+            SqlDataReader reader;
+            //init a report list
+            var monthReports = new List<Monthly_Sales_Report>();
+
+            cnn = ConnectionHelper.openConnection();
+
+
+            var reportsql = "SELECT * FROM Monthly_Sales_Part1;";
+
+            //sql command
+            cmd = new SqlCommand(reportsql, cnn);
+            //read resutlt
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //put single row into report variable
+                var monthReport = new Monthly_Sales_Report();
+
+                monthReport.month = (DateTime)reader["month"];
+                monthReport.Ratio = (decimal)reader["Ratio"];
+                monthReport.SalesIncome = (decimal)reader["SalesIncome"];
+                monthReport.totalNetIncome = (decimal)reader["totalNetIncome"];
+                monthReport.totalVehicleSold = (int)reader["totalVehicleSold"];
+                monthReport.year = (DateTime)reader["year"];
+                //add single report vairable into report list
+                monthReports.Add(monthReport);
+            }
+
+            //append report list to viewbag for frontend reading
+            ViewBag.month_report = monthReports;
             return View();
+
+
         }
-
-
-
     }
-}
+    }
+
