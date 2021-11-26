@@ -664,20 +664,34 @@ namespace team011.Controllers
             SqlDataReader reader;
             //init a report list
             var averageInventoryReports = new List<AverageInventoryTimeReport>();
-
+        
             cnn = ConnectionHelper.openConnection();
 
             var reportsql = "SELECT * FROM Average_Time_Inventory_Report;";
+            
             //sql command
             cmd = new SqlCommand(reportsql, cnn);
             //read resutlt
             reader = cmd.ExecuteReader();
+            
+            
+
             while (reader.Read())
             {
                 //put single row into report variable
                 var averageInventoryReport = new AverageInventoryTimeReport();
                 averageInventoryReport.vehicle_type = (string)reader["vehicle_type"];
-                averageInventoryReport.avg_day_in_inventory = (int)reader["avg_day_in_inventory"];
+                if ((int)reader["avg_day_in_inventory"] != 0)
+                {
+                    var count = (int)reader["avg_day_in_inventory"];
+                    averageInventoryReport.avg_day_in_inventory = count.ToString() ;
+                }
+                else
+                {
+                    averageInventoryReport.avg_day_in_inventory = "N/A";
+                }
+              
+               
 
                 //add single report vairable into report list
                 averageInventoryReports.Add(averageInventoryReport);

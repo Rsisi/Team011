@@ -66,7 +66,9 @@
         <tbody id="unsoldvehicles">
             @foreach (var r in belowCostSalesReport)
             {
-            <tr>
+                if (r.ratio <= 95)
+                {
+            <tr style="background-color:red">
                 <th>
                     @r.customer_name
                 </th>
@@ -99,6 +101,43 @@
                     @r.last_name
                 </td>
             </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>
+                            @r.customer_name
+                        </th>
+                        <th>
+                            @r.transaction_date
+                        </th>
+                        <td>
+                            @r.VIN
+                        </td>
+                        <td>
+                            @r.sold_price
+                        </td>
+                        <td>
+                            @r.invoice_price
+                        </td>
+                        <td>
+                            @r.ratio
+                        </td>
+                        <td>
+                            @r.model_year
+                        </td>
+                        <td>
+                            @r.manufacturer_name
+                        </td>
+                        <td>
+                            @r.model_name
+                        </td>
+                        <td>
+                            @r.first_name
+                            @r.last_name
+                        </td>
+                    </tr>
+                }
 
             }
 

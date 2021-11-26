@@ -58,37 +58,108 @@
         <tbody id="unsoldvehicles">
             @foreach (var r in monthReport)
             {
-            <tr>
-                <td>
-                    <a href="@Url.Action("MonthlyTopSalesReport","Report", new {@SaleMonth = r.month, @SaleYear = r.year})">
-                        @r.year
-                    </a>
-                </td>
-                <td>
-                 
+                if (r.Ratio >= 125)
+                {
+                    <tr style="background-color:green">
+                        <td>
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SaleMonth = r.month, @SaleYear = r.year })">
+                                @r.year
+                            </a>
+                        </td>
+                        <td>
 
-                    <a href="@Url.Action("MonthlyTopSalesReport","Report", new { @SaleMonth = r.month, @SaleYear = r.year})">
-                        @r.month
-                    </a>
 
-                </td>
-             
-                <th>
-                    @r.totalVehicleSold
-                </th>
-                <th>
-                    @r.SalesIncome
-                </th>
-                <th>
-                    @r.totalNetIncome
-                </th>
-                <th>
-                    @r.totalVehicleSold
-                </th>
-                <th>
-                    @r.Ratio
-                </th>
-            </tr>
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SalMonth = r.month, @SaleYear = r.year })">
+                                @r.month
+                            </a>
+
+                        </td>
+
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.SalesIncome
+                        </th>
+                        <th>
+                            @r.totalNetIncome
+                        </th>
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.Ratio
+                        </th>
+                    </tr>
+                }
+                else if (r.Ratio <= 110)
+                {
+                    <tr style="background-color:yellow">
+                        <td>
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SaleMonth = r.month, @SaleYear = r.year })">
+                                @r.year
+                            </a>
+                        </td>
+                        <td>
+
+
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SalMonth = r.month, @SaleYear = r.year })">
+                                @r.month
+                            </a>
+
+                        </td>
+
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.SalesIncome
+                        </th>
+                        <th>
+                            @r.totalNetIncome
+                        </th>
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.Ratio
+                        </th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SaleMonth = r.month, @SaleYear = r.year })">
+                                @r.year
+                            </a>
+                        </td>
+                        <td>
+
+
+                            <a href="@Url.Action("MonthlyTopSalesReport", "Report", new { @SalMonth = r.month, @SaleYear = r.year })">
+                                @r.month
+                            </a>
+
+                        </td>
+
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.SalesIncome
+                        </th>
+                        <th>
+                            @r.totalNetIncome
+                        </th>
+                        <th>
+                            @r.totalVehicleSold
+                        </th>
+                        <th>
+                            @r.Ratio
+                        </th>
+                    </tr>
+                }
 
             }
         </tbody>
