@@ -3776,3 +3776,4 @@
 /Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/obj/Debug/netcoreapp3.1/team011.Views.pdb
 /Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/obj/Debug/netcoreapp3.1/team011.csproj.CopyComplete
 /Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/obj/Debug/netcoreapp3.1/team011.genruntimeconfig.cache
+/Users/christineloveyy/Gatech/Pratice/GIT/Team011/team011/team011/obj/Debug/netcoreapp3.1/Razor/Views/Report/MonthlyTopSalesReport.cshtml.g.cs

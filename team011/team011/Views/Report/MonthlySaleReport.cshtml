@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    var monthReport = ViewBag.month_report as List<Monthly_Sales_Report>;
+    var monthReport = ViewBag.month_report as List<MonthlySalesReport>;
 }
 <h1>Report - Monthly Sales</h1>
 
@@ -58,26 +58,37 @@
         <tbody id="unsoldvehicles">
             @foreach (var r in monthReport)
             {
-                <tr>
-                    <th>
+            <tr>
+                <td>
+                    <a href="@Url.Action("MonthlyTopSalesReport","Report", new {@SaleMonth = r.month, @SaleYear = r.year})">
                         @r.year
-                    </th>
-                    <th>
+                    </a>
+                </td>
+                <td>
+                 
+
+                    <a href="@Url.Action("MonthlyTopSalesReport","Report", new { @SalMonth = r.month, @SaleYear = r.year})">
                         @r.month
-                    </th>
-                    <th>
-                        @r.totalVehicleSold
-                    </th>
-                    <th>
-                        @r.SalesIncome
-                    </th>
-                    <th>
-                        @r.totalNetIncome
-                    </th>
-                    <th>
-                        @r.totalVehicleSold
-                    </th>
-                </tr>
+                    </a>
+
+                </td>
+             
+                <th>
+                    @r.totalVehicleSold
+                </th>
+                <th>
+                    @r.SalesIncome
+                </th>
+                <th>
+                    @r.totalNetIncome
+                </th>
+                <th>
+                    @r.totalVehicleSold
+                </th>
+                <th>
+                    @r.Ratio
+                </th>
+            </tr>
 
             }
         </tbody>
@@ -85,27 +96,3 @@
 
 </div>
 
-<h1>Top Salesperson</h1>
-
-<div id="tblunsoldVehicles" style="padding-top:5px">
-    <table id="tblunsoldvehicles" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Number of Sales
-                </th>
-                <th>
-                    Total Sales Income of the Year
-                </th>
-                <th>
-                    Total Sales Income of the Month
-                </th>
-            </tr>
-        </thead>
-        <tbody id="unsoldvehicles">
-           
-        </tbody>
-    </table>

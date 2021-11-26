@@ -677,7 +677,7 @@ namespace team011.Controllers
                 //put single row into report variable
                 var averageInventoryReport = new AverageInventoryTimeReport();
                 averageInventoryReport.vehicle_type = (string)reader["vehicle_type"];
-                averageInventoryReport.avg_day_in_inventory = (DateTime)reader["avg_day_in_inventory"];
+                averageInventoryReport.avg_day_in_inventory = (int)reader["avg_day_in_inventory"];
 
                 //add single report vairable into report list
                 averageInventoryReports.Add(averageInventoryReport);
@@ -731,7 +731,7 @@ namespace team011.Controllers
             SqlConnection cnn;
             SqlDataReader reader;
             //init a report list
-            var monthReports = new List<Monthly_Sales_Report>();
+            var monthReports = new List<MonthlySalesReport>();
 
             cnn = ConnectionHelper.openConnection();
 
@@ -745,14 +745,14 @@ namespace team011.Controllers
             while (reader.Read())
             {
                 //put single row into report variable
-                var monthReport = new Monthly_Sales_Report();
+                var monthReport = new MonthlySalesReport();
 
-                monthReport.month = (DateTime)reader["month"];
+                monthReport.month = (int)reader["month"];
                 monthReport.Ratio = (decimal)reader["Ratio"];
                 monthReport.SalesIncome = (decimal)reader["SalesIncome"];
                 monthReport.totalNetIncome = (decimal)reader["totalNetIncome"];
                 monthReport.totalVehicleSold = (int)reader["totalVehicleSold"];
-                monthReport.year = (DateTime)reader["year"];
+                monthReport.year = (int)reader["year"];
                 //add single report vairable into report list
                 monthReports.Add(monthReport);
             }
@@ -763,6 +763,55 @@ namespace team011.Controllers
 
 
         }
-    }
+        public IActionResult MonthlyTopPeopleSaleReport(int SaleMonth, int SaleYear)
+        {
+            //open sql connection
+            SqlCommand cmd;
+            SqlConnection cnn;
+            SqlDataReader reader;
+            //init a report list
+            var monthTopReports = new List<MonthlyTopSalesReport>();
+
+            cnn = ConnectionHelper.openConnection();
+
+
+            var reportsql = "SELECT TOP 1 u.first_name, u.last_name, COUNT(VIN) AS TotalVehicleSold, SUM (SalesTransaction.sold_price) AS Sales " +
+                "FROM SalesTransaction INNER JOIN Salespeople s " +
+                "ON sales_writer_user_name = s.user_name " +
+                "INNER JOIN Users u on s.user_name = u.user_name " +
+                "WHERE YEAR(transaction_date) = @DisplayedYear and MONTH(transaction_date) = @DisplayedMonth " +
+                "GROUP BY u.first_name, u.last_name " +
+                "ORDER BY Sales DESC;" ;
+
+            //sql command
+            cmd = new SqlCommand(reportsql, cnn);
+            //read resutlt
+            cmd.Parameters.AddWithValue("@DisplayedYear", SaleYear);
+            cmd.Parameters.AddWithValue("@DisplayedMonth", SaleMonth);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //put single row into report variable
+                var monthTopReport = new MonthlyTopSalesReport();
+
+                monthTopReport.firstName = (string)reader["firstName"];
+                monthTopReport.lastName = (string)reader["lastName"];
+
+                monthTopReport.SalesIncome = (decimal)reader["SalesIncome"];
+                
+                monthTopReport.totalVehicleSold = (int)reader["totalVehicleSold"];
+           
+                //add single report vairable into report list
+                monthTopReports.Add(monthTopReport);
+            }
+
+            //append report list to viewbag for frontend reading
+            ViewBag.month_Top_report = monthTopReports;
+            ViewBag.TempMonth = SaleMonth;
+            ViewBag.TempYear = SaleYear;
+
+            return View();
+        }
+        }
     }
 
