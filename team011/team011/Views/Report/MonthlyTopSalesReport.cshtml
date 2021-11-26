@@ -3,8 +3,8 @@
 *@
 @{
     var monthTopReport = ViewBag.month_Top_report as List<MonthlyTopSalesReport>;
-    string tempMonth = (ViewBag.TempMonth).toString();
-    string tempYear = (ViewBag.TempYear).toString();
+    int tempMonth = ViewBag.TempMonth;
+    int tempYear = ViewBag.TempYear;
 }
 <h1>Report - Monthly Sales</h1>
 
@@ -54,8 +54,8 @@
 
                 <tr>
                     <td>
-                       @r.firstName
-                        @r.lastName
+                       @r.first_Name
+                        @r.last_Name
 
                     </td>
 
@@ -63,7 +63,7 @@
                         @r.totalVehicleSold
                     </th>
                     <td>
-                        @r.SalesIncome
+                        @r.Sales
                     </td>
     
                 </tr>

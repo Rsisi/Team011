@@ -763,7 +763,7 @@ namespace team011.Controllers
 
 
         }
-        public IActionResult MonthlyTopPeopleSaleReport(int SaleMonth, int SaleYear)
+        public IActionResult MonthlyTopSalesReport(int SaleMonth, int SaleYear)
         {
             //open sql connection
             SqlCommand cmd;
@@ -794,10 +794,10 @@ namespace team011.Controllers
                 //put single row into report variable
                 var monthTopReport = new MonthlyTopSalesReport();
 
-                monthTopReport.firstName = (string)reader["firstName"];
-                monthTopReport.lastName = (string)reader["lastName"];
+                monthTopReport.first_Name = (string)reader["first_Name"];
+                monthTopReport.last_Name = (string)reader["last_Name"];
 
-                monthTopReport.SalesIncome = (decimal)reader["SalesIncome"];
+                monthTopReport.Sales = (decimal)reader["Sales"];
                 
                 monthTopReport.totalVehicleSold = (int)reader["totalVehicleSold"];
            

@@ -1,23 +1,29 @@
 ﻿<Properties StartupConfiguration="{98BCB2B4-A5E7-4AF8-A2C9-8311F46A5D7C}|Default">
   <MonoDevelop.Ide.ItemProperties.team011 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Report/MonthlySaleReport.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ReportController.cs">
     <Files>
-      <File FileName="Views/Report/MonthlyTopSalerReport.cshtml" Line="1" Column="1" />
+      <File FileName="Views/Report/MonthlyTopSalerReport.cshtml" Line="31" Column="62" />
       <File FileName="Models/MonthlyTopSalesReport.cs" Line="1" Column="1" />
-      <File FileName="Controllers/ReportController.cs" Line="1" Column="1" />
-      <File FileName="Views/Report/MonthlySaleReport.cshtml" Line="63" Column="58" />
+      <File FileName="Controllers/ReportController.cs" Line="811" Column="29" />
+      <File FileName="Views/Report/MonthlySaleReport.cshtml" Line="70" Column="92" />
+      <File FileName="Views/Report/ManufacturerReport.cshtml" Line="1" Column="1" />
+      <File FileName="Controllers/UserController.cs" Line="1" Column="1" />
+      <File FileName="Views/Report/RepairReport.cshtml" Line="1" Column="1" />
+      <File FileName="Views/Report/RepairTypeReport.cshtml" Line="64" Column="111" />
+      <File FileName="Views/Report/RepairModelReport.cshtml" Line="1" Column="1" />
+      <File FileName="Controllers/RepairOrderController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="team011" expanded="True">
             <Node name="team011" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ReportController.cs" selected="True" />
+              </Node>
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Report" expanded="True">
-                  <Node name="MonthlySaleReport.cshtml" selected="True" />
-                </Node>
+                <Node name="Report" expanded="True" />
               </Node>
             </Node>
           </Node>
